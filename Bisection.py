@@ -2,9 +2,10 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
+goal = 0
 
-def f(a):
-    return a * math.sin(a)
+def f(x):
+    return x * math.sin(x)
 
 
 def error_tolerance(precision, x1, x2):
@@ -22,19 +23,20 @@ def bisection_method(a, b, precision, max_iters):
         result_list.append([iters, x])
         error_list.append([iters, err])
         
-        if f(x) * f(b) < 0:
+        if f(x) * f(b) < goal:
             a = x
         else:
             b = x
+            
         iters += 1
 
     return result_list, error_list
 
 
 def main():
-    precision = 1e-7
+    precision = 1e-20
     max_iters = 100
-
+    print("Function: x * sin(x) = ", goal)
     a = float(input("Write a: "))
     b = float(input("Write b: "))
 
