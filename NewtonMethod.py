@@ -1,12 +1,9 @@
-import math
-import matplotlib.pyplot as plt
-
-goal = 0
+import numpy as np
 
 def f(x): 
-    return x * math.sin(x)
+    return x**3 + x**2 - 1
 
-def newton_method(a, precision, max_iters):
+def newton_method(a, precision, max_iters, goal):
     result_list = []
     error_list = []
     iters = 0
@@ -30,31 +27,10 @@ def newton_method(a, precision, max_iters):
 
     return result_list, error_list
 
-def main():
-    precision = 1e-20
-    max_iters = 100
-
+def newton(precision, max_iters, goal):
+    print("Newton Method")
     a = float(input("Write x0: "))
     
-    result_list, epsilon_list = newton_method(a, precision, max_iters+1) 
+    result_list, epsilon_list = newton_method(a, precision, max_iters+1 , goal) 
     
-    for iteration, answer in result_list:
-        print(f"Iteration {iteration}: Answer = {answer}")
-    outputGraph(result_list, 'Answer')
-    
-    for iteration, epsilon in epsilon_list:
-        print(f"Iteration {iteration}: Epsilon = {epsilon}")
-    outputGraph(epsilon_list, 'Epsilon')
-
-def outputGraph(array_list, name):
-    iterations, answers = zip(*array_list)  
-
-    plt.plot(iterations, answers, marker='o')
-    plt.xlabel('Iteration')
-    plt.ylabel(name)
-    plt.title('Iterative Method: Iteration vs. ' + name)
-    plt.grid(True)
-    plt.show()
-
-if __name__ == "__main__":
-    main()
+    return result_list, epsilon_list

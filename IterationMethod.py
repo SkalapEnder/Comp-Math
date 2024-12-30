@@ -1,13 +1,12 @@
-import math
-import matplotlib.pyplot as plt
+import numpy as np
 
-goal = 1
+goal = 0
 
 def f(x): 
-    return x * (math.e ** x)
+    return x**3 + x**2 - 1
 
 def phi(x):
-        return (math.e ** (-x))
+    return (1 + x) ** (-1/2)
 
 def iterative_method(a, precision, max_iters):
     result_list = []
@@ -16,6 +15,10 @@ def iterative_method(a, precision, max_iters):
 
     while iters < max_iters:
         x = phi(a)
+
+        if x == None:
+            break
+        
         eps = abs(x - a)
 
         result_list.append([iters+1, x])
@@ -29,31 +32,12 @@ def iterative_method(a, precision, max_iters):
         iters += 1
     return result_list, error_list
 
-def main():
-    precision = 1e-20
-    max_iters = 100
-
+def iterative(precision, max_iters, goalM):
+    goal = goalM
+    
+    print("Iteration Method")
     a = float(input("Write x0: "))
     
     result_list, epsilon_list = iterative_method(a, precision, max_iters+1) 
     
-    for iteration, answer in result_list:
-        print(f"Iteration {iteration}: Answer = {answer}")
-    outputGraph(result_list, 'Answer')
-    
-    for iteration, epsilon in epsilon_list:
-        print(f"Iteration {iteration}: Epsilon = {epsilon}")
-    outputGraph(epsilon_list, 'Epsilon')
-
-def outputGraph(array_list, name):
-    iterations, answers = zip(*array_list)  
-
-    plt.plot(iterations, answers, marker='o')
-    plt.xlabel('Iteration')
-    plt.ylabel(name)
-    plt.title('Iterative Method: Iteration vs. ' + name)
-    plt.grid(True)
-    plt.show()
-
-if __name__ == "__main__":
-    main()
+    return result_list, epsilon_list
