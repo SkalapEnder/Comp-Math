@@ -1,18 +1,32 @@
 import math
 import matplotlib.pyplot as plt
 
-goal = 0
+goal = 1
 
 def f(x): 
-    return x * math.sin(x)
+    return x * (math.e ** x)
 
-def iterative_method(a, b, precision, max_iters):
+def phi(x):
+        return (math.e ** (-x))
+
+def iterative_method(a, precision, max_iters):
     result_list = []
     error_list = []
     iters = 0
 
     while iters < max_iters:
-        print()
+        x = phi(a)
+        eps = abs(x - a)
+
+        result_list.append([iters+1, x])
+        error_list.append([iters+1, eps])
+
+        if eps < precision:
+            break
+
+        a = x
+
+        iters += 1
     return result_list, error_list
 
 def main():
@@ -21,7 +35,7 @@ def main():
 
     a = float(input("Write x0: "))
     
-    result_list, epsilon_list = iterative_method(a, b, precision, max_iters+1) 
+    result_list, epsilon_list = iterative_method(a, precision, max_iters+1) 
     
     for iteration, answer in result_list:
         print(f"Iteration {iteration}: Answer = {answer}")

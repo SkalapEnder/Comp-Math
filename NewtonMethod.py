@@ -6,40 +6,37 @@ goal = 0
 def f(x): 
     return x * math.sin(x)
 
-def false_position(a, b, precision, max_iters):
+def newton_method(a, precision, max_iters):
     result_list = []
     error_list = []
     iters = 0
+    h = 1e-6
 
     while iters < max_iters:
-        x = ((a * f(b)) - (b * f(a))) / (f(b) - f(a))
+        df = (f(a + h) - f(a - h)) / (2 * h)
+
+        x = a - (f(a) / df)
         eps = abs(x - a)
-        print(eps)
 
         result_list.append([iters+1, x])
         error_list.append([iters+1, eps])
-        
+
         if eps < precision:
             break
 
-        if f(a) * f(x) < 0:
-            b = x
-        else:
-            a = x
-            
+        a = x
+
         iters += 1
-    
+
     return result_list, error_list
 
 def main():
     precision = 1e-20
     max_iters = 100
-    print("Function: x * sin(x) = ", goal)
-    a = float(input("Write a: "))
-    b = float(input("Write b: "))
+
+    a = float(input("Write x0: "))
     
-    
-    result_list, epsilon_list = false_position(a, b, precision, max_iters+1) 
+    result_list, epsilon_list = newton_method(a, precision, max_iters+1) 
     
     for iteration, answer in result_list:
         print(f"Iteration {iteration}: Answer = {answer}")
@@ -55,7 +52,7 @@ def outputGraph(array_list, name):
     plt.plot(iterations, answers, marker='o')
     plt.xlabel('Iteration')
     plt.ylabel(name)
-    plt.title('False Position Method: Iteration vs. ' + name)
+    plt.title('Iterative Method: Iteration vs. ' + name)
     plt.grid(True)
     plt.show()
 
