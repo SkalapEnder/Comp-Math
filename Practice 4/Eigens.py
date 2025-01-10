@@ -1,16 +1,11 @@
 import numpy as np
 
-def eigens(A):
+A = [[2, -1, 0],
+    [-1, 2, -1],
+    [0, -1, 2]]
 
-  return None, None
-
-
-A = np.array([[2, -1, 0],
-              [-1, 2, -1],
-              [0, -1, 2]])
-
-eigenvalue, eigenvector = eigens(A)
-if eigenvalue != None and eigenvector != None:
+eigenvalue, eigenvector = np.linalg.eig(A) 
+if eigenvalue.any() and eigenvector.any():
     print("Eigenvalue: ", eigenvalue)
     print("Eigenvector: ", eigenvector)
 else:
