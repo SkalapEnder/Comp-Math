@@ -2,22 +2,24 @@ import matplotlib.pyplot as plt
 
 def jacobi_iteration(A, b, x0, tol=1e-6, max_iters=100):
     n = len(b)
-    x = x0[:]
+    x = x0[:] # Temp vector
     result_list = [[],[],[],[]]
     epsilon_list = [[],[],[],[]]
 
     for iteration in range(max_iters):
-        x_new = x[:]
+        x_new = x[:] 
 
+        # Output list
         result_list[0].append(iteration)
         epsilon_list[0].append(iteration)
+
         for i in range(n):
-            sum_terms_1 = sum(A[i][j] * x[j] for j in range(n) if j != i)
+            sum_terms_1 = sum(A[i][j] * x[j] for j in range(n) if j != i) # Update solution's values for each iteration
 
             x_new[i] = (b[i] - sum_terms_1) / A[i][i]
             result_list[i+1].append(x_new[i])
         
-        for i in range(n):
+        for i in range(n): # Output list
             epsilon_list[i+1].append(abs(x_new[i] - x[i]))
 
         # Error tolerance (everything must be less than tolerance)
@@ -27,6 +29,7 @@ def jacobi_iteration(A, b, x0, tol=1e-6, max_iters=100):
         x = x_new
     
     return x, result_list, epsilon_list
+
 
 def print_2lists(result, epsilon):
     print('Iters\t \033[32mSolution (Xi, Yi, Zi)\033[0m\t\t\t\033[31mError (Xi, Yi, Zi)\033[0m')

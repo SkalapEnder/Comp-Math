@@ -1,48 +1,57 @@
 from Determinant import det
 
-def get_minor(matrix, row, col):
-    return [r[:col] + r[col+1:] for r in (matrix[:row] + matrix[row+1:])]
+def inverse_matrix(matrix):
+  n = len(matrix)
 
-def adjugate_matrix(A):
-    adj = []
-    for r in range(len(A)):
-        adj_row = []
+  # Create an second (I) matrix (1s on diagonal)
+  inverse = [[float(i == j) for i in range(n)] for j in range(n)]
 
-        for c in range(len(A)):
-            minor = get_minor(A, r, c)
-            cofactor = ((-1) ** (r + c)) * det(minor)
-            adj_row.append(cofactor)
+  for i in range(n):
+    pivot = i
 
-        adj.append(adj_row)
-    return transpose_matrix(adj)
+    for j in range(i + 1, n):
+      if abs(matrix[j][i]) > abs(matrix[pivot][i]):
+        pivot = j
 
-def transpose_matrix(matrix):
-    """Transpose a matrix."""
-    return [list(row) for row in zip(*matrix)]
+    matrix[i], matrix[pivot] = matrix[pivot], matrix[i]
+    inverse[i], inverse[pivot] = inverse[pivot], inverse[i]
 
-def invert_matrix(A):
-    deter = det(A)
-    if deter == 0:  
-        return None
-    adj = adjugate_matrix(A)
-    return [[adj[r][c] / deter for c in range(len(adj))] for r in range(len(adj))]
+    if matrix[i][i] == 0:
+      return None  # Matrix's det is 0 --> Matrix is not invertible
+
+    # Elimination left matrix row to pivot row
+    factor = 1 / matrix[i][i]
+    for j in range(n):
+      matrix[i][j] *= factor
+      inverse[i][j] *= factor
+
+    # Elimination down in each column
+    for j in range(n):
+      if j == i: # Pass diagonals
+        continue
+
+      factor = matrix[j][i]
+      for k in range(n):
+        matrix[j][k] -= factor * matrix[i][k]
+        inverse[j][k] -= factor * inverse[i][k]
+
+  return inverse
 
 def print_matrix(matrix):
-    for row in matrix:
-        t = '|  '
-        for col in row:
-            t += str(round(col, 8))
-            t += '   '
-        t += ' |'
-        print(t)
+    for i in range(len(matrix)):
+        row = str(i) + ' |  '
+        for j in range(len(matrix[0])):
+            row += str(round(matrix[i][j], 6)) + '  |  '
+        print(row)
 
 A = [[20., 1., -2.],
      [3., 20., -1.],
      [2., -3., 20.]
 ]
-In = invert_matrix(A)
+
+In = inverse_matrix(A)
 if In != None:
-    print("Inverse matrix")
+    print("\tInverse matrix:")
     print_matrix(In)
 else:
     print("There is no inverse for this matrix!")

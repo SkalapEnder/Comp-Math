@@ -20,7 +20,7 @@ def gauss_elimination(matrix):
     solution = [0] * n
     for i in range(n - 1, -1, -1):
         solution[i] = matrix[i][-1] / matrix[i][i]
-        # Move to upper row to eliminate numbers
+        # Move to upper rows
         for j in range(i - 1, -1, -1):
             matrix[j][-1] -= matrix[j][i] * solution[i]
 

@@ -12,8 +12,8 @@ def gauss_seidel(A, b, x0, tol=1e-6, max_iters=100):
         result_list[0].append(iteration)
         epsilon_list[0].append(iteration)
         for i in range(n):
-            sum_terms_1 = sum(A[i][j] * x[j] for j in range(i+1, n))
-            sum_terms_2 = sum(A[i][j] * x_new[j] for j in range(i))
+            sum_terms_1 = sum(A[i][j] * x[j] for j in range(i+1, n)) # New values
+            sum_terms_2 = sum(A[i][j] * x_new[j] for j in range(i)) # Previous iteration
             x_new[i] = (b[i] - sum_terms_2 - sum_terms_1) / A[i][i]
             result_list[i+1].append(x_new[i])
 
