@@ -43,9 +43,9 @@ def forward_difference_table(data):
 data = [(2, 45.0), (3, 49.2), (4, 54.1)]
 x_interp = 5
 
-y_interp = forward_interpolation(data, x_interp)
+# y_interp = forward_interpolation(data, x_interp)
 print("Task 6 & 10")
-print(f"\nP({x_interp:.2f}) = {y_interp:.2f}") 
+# print(f"\nP({x_interp:.2f}) = {y_interp:.2f}") 
 
 y_interp = lagrange_interpolation(data, x_interp)
 print(f"\nP({x_interp:.2f}) = {y_interp:.2f}") 

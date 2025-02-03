@@ -1,5 +1,6 @@
 from Functions.Forward import difference_table
 
+data_1 = [(10, 1.1), (20, 2.0), (30, 4.4), (40, 7.9)]
 data_2 = [(0, 1.0), (1, 1.5), (2, 2.2), (3, 3.1), (4, 4.6)]
 
 print('\tTask 2')
@@ -23,4 +24,4 @@ match choice:
     case 'No':
         output_step = False
 
-_ = difference_table(data_2, way, output_step)
+_ = difference_table(data_1, True, output_step, way)

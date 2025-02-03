@@ -80,9 +80,9 @@ def second_degree_parabola_model(x_data, y_data):
     n = len(x_data)
     sum_x, sum_x2, sum_x3, sum_x4, sum_y, sum_xy, sum_x2y = summations(x_data, y_data, 'second_degree_parabola')
     
-    A = [[n, sum_x, sum_x2], # Respect to a
-        [sum_x, sum_x2, sum_x3], # Respect to b
-        [sum_x2, sum_x3, sum_x4]] # Respect to c
+    A = [[n, sum_x, sum_x2],
+        [sum_x, sum_x2, sum_x3], 
+        [sum_x2, sum_x3, sum_x4]]
     B = [sum_y, sum_xy, sum_x2y]
     
     coefficients = gauss_elimination(A, B)

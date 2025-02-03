@@ -2,7 +2,7 @@ from Functions.Forward2 import forward_difference_table
 
 def print_table(table):
     print("\nDifference Table:")
-    print(f"{'x':<10}{'f(x)':<10}", end="")
+    print(f"{'f(x)':<10}", end="")
 
     for i in range(1, n):
         print(f"∇^{i}f{'':<5}", end="")
@@ -42,10 +42,12 @@ factorial = 1
 for i in range(1, len(first_row_differences)):
     term *= (u - (i - 1))
     factorial *= i
+    print(f'{y_extrapolated} += ({term} / {factorial}) * {first_row_differences[i]}')
     y_extrapolated += (term / factorial) * first_row_differences[i]
 
 # Step 4: Verify by substitution
 y_direct = y_function(x_target)
 
 print_table(difference_table)
-print(y_extrapolated, y_direct)
+print("Extrapolated y: ", y_extrapolated)
+print("Direct y: ", y_direct)
