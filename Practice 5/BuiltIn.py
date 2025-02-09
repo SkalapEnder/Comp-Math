@@ -75,27 +75,6 @@ def guess_best_model(x_data, y_data):
 # Example usage with a dataset
 data_2 = data_3 = [(0.1, 1.05), (1, 2.1), (2,  3.85), (3 , 8.3)]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 x_data = [point[0] for point in data_2]
 y_data = [point[1] for point in data_2]
 
