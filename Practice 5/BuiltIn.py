@@ -16,7 +16,6 @@ def exponent(x, a, b):
     return a * np.exp(b * x)  # Use numpy.exp for vectorized operations
 
 def another_parabola(x, a, b):
-    # Avoid division by zero
     return np.where(x != 0, a * x + b / x, np.inf)
 
 # Calculate residuals

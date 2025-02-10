@@ -14,18 +14,23 @@ def simpsons_13_rule(f, f_der, a, b, n):
     
     h = (b - a) / n
     max_f_fourth_prime = max(abs(f_der(x)) for x in [a, b])  # Approximate max
-    error = (b - a) / 180 * h**4 * max_f_fourth_prime
+    if max_f_fourth_prime < 0.01: max_f_fourth_prime = 1
+    error = (-(b - a) ** 5) / (180 * n**4) * max_f_fourth_prime
     
     integral *= h / 3
     return integral, error
 
 if __name__ == "__main__":
     def f(x):
-        return x**2
+        return x**4
+    
+    def f_der(x):
+        return 24.0 * (x - x + 1)
 
     a = 0 
     b = 1 
-    n = 100
+    n = 16
 
-    result = simpsons_rule(f, a, b, n)
+    result, error = simpsons_13_rule(f, 1, a, b, n)
     print(f"The approximate integral is: {result}")
+    print(f"The approximate error is: {error}")
