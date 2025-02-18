@@ -3,7 +3,7 @@ import numpy as np
 def f(x): 
     return x**3 + x**2 - 1
 
-def newton_method(a, precisio, max_iters, goal):
+def newton_method(a, precision, max_iters, goal):
     result_list = []
     error_list = []
     iters = 0

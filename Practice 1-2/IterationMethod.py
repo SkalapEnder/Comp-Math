@@ -3,10 +3,10 @@ import numpy as np
 goal = 0
 
 def f(x): 
-    return x**3 + x**2 - 1
+    return 3**x - 8*x
 
 def phi(x):
-    return (1 + x) ** (-1/2)
+    return 3**x  / 8
 
 def iterative_method(a, precision, max_iters):
     result_list = []
@@ -41,3 +41,10 @@ def iterative(precision, max_iters, goalM):
     result_list, epsilon_list = iterative_method(a, precision, max_iters+1) 
     
     return result_list, epsilon_list
+
+if __name__ == "__main__":
+    res, err = iterative(1e-6, 100, 0)
+    
+    print(res[-1][1])
+    print(err[-1][1])
+    

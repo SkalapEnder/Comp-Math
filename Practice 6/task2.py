@@ -1,7 +1,7 @@
 from Functions.Forward import difference_table
 
 data_1 = [(10, 1.1), (20, 2.0), (30, 4.4), (40, 7.9)]
-data_2 = [(0, 1.0), (1, 1.5), (2, 2.2), (3, 3.1), (4, 4.6)]
+data_2 = [(-0.75, -0.0718125), (-0.5, -0.02475), (-0.25, 0.3349375), (0, 1.10100)]
 
 print('\tTask 2')
 print('Choose way to find differences: ')

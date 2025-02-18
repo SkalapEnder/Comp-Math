@@ -12,7 +12,8 @@ def cramer(A, b):
         D = [row[:] for row in A]
         for j in range(n):
             D[j][i] = b[j]
-
+            print(D[j])
+        print()
         solution[i] = det(D) / det(A)
 
     return solution

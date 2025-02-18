@@ -64,7 +64,7 @@ def summations(xs, ys, model):
         case 'second_degree_parabola':
             return sum_x, sum_x2, sum_x3, sum_x4, sum_y, sum_xy, sum_x2y
 
-# Linear Model: y = mx + b
+# Linear Model: y = mx + b 
 def linear_model(x_data, y_data):
     n = len(x_data)
     sum_x, sum_y, sum_xy, sum_xx = summations(x_data, y_data, 'linear')
@@ -119,7 +119,7 @@ def another_parabola_model(x_data, y_data):
     sum_x, sum_y, sum_xy, sum_xx, _, _ = summations(x_data, y_data, 'exponential')
     sum_1_x = sum(1 / xi for xi in x_data)
     sum_y_div_x = sum(yi / xi for xi, yi in zip(x_data, y_data))
-
+    
     A = [
         [sum_xx, sum_x], # With respect to a
         [sum_x, sum_1_x] # With respect to b

@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 def gauss_seidel(A, b, x0, tol=1e-6, max_iters=100):
-    n = len(b)
+    n = len(b) # 3
     x = x0[:]
     result_list = [[],[],[],[]]
     epsilon_list = [[],[],[],[]]

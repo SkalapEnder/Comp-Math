@@ -23,7 +23,30 @@ def forward_interpolation(data, x_interp):
 
     return result
 
-def forward_difference_table(data):
+def backward_interpolation(data, x_interp):
+    x = [point[0] for point in data]
+    y = [point[1] for point in data]
+  
+    n = len(x)
+
+    diff_table = forward_difference_table(data) 
+
+    # Calculate u
+    h = x[1] - x[0]
+    u = (x_interp - x[0]) / h
+
+    # Initialize result
+    result = diff_table[0][-1]
+
+    # Calculate interpolated value using forward difference formula
+    term = 1
+    for i in range(n-1, -1, -1):
+        term *= (u - i) / i
+        result += term * diff_table[i][0]
+
+    return result
+
+def backward_difference_table(data):
     x_values = [point[0] for point in data]
     f_values = [point[1] for point in data]
 
@@ -34,9 +57,10 @@ def forward_difference_table(data):
         table[i][0] = x_values[i]
         table[i][1] = f_values[i]
 
-    for col in range(2, n + 1):
-        for row in range(n - col + 1):
-            table[row][col] = table[row + 1][col - 1] - table[row][col - 1]
+    for col in range(1, n):
+        for row in range(col, n):
+            table[row][col] = table[row][col - 1] - table[row - 1][col - 1]
+            if output_step: print(f'{table[row][col]:.2f}\t| {table[row][col - 1]:.2f}  -  {table[row - 1][col - 1]:.2f}')
     
     return table
 
